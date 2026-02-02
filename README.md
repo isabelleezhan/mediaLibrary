@@ -1,4 +1,4 @@
-# MediaLibrary: Personal Media Library
+# MediaLibrary
 *A desktop application for tracking books, movies, and TV shows in one place*
 
 ## About
