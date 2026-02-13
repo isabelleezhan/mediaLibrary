@@ -3,25 +3,29 @@ package model;
 // Represents a movie in the media library
 public class Movie extends Media {
 
-    // EFFECTS: constructs a movie with the given title, consumption status, director, and genre
+    private String director;
+
+    // EFFECTS: constructs a movie with the given title, consumption status,
+    // director, and genre
     public Movie(String title, Status status, String director, String genre) {
-        // stub
+        super(title, status, genre);
+        this.director = director;
     }
 
     public String getDirector() {
-        return "";
+        return director;
     }
 
     // EFFECTS: returns director information
     @Override
     public String getDisplayInfo() {
-        return "";
+        return "Director: " + director;
     }
 
     // EFFECTS: returns a string representation of this media item
     @Override
     public String getMediaType() {
-        return "";
+        return "Movie";
     }
 
 }
