@@ -13,8 +13,9 @@ Bookworms and movie/TV enthusiasts like myself who juggle extensive "To be Read"
 ## User Stories
 
 - As a user, I want to be able to **add a media item to my library** (book/movie/TV show) and specify its title, status, and genre
-- As a user, I want to be able to **view a list of all my media items filtered by status and media type** 
+- As a user, I want to be able to **view a list of all my media items**, and all my media items **filtered by status and media type** 
 - As a user, I want to be able to **update the status and progress for a media item** "Want to Read", "Finished", "Currently Reading/Watching", or "Did Not Finish"
 - As a user, I want to **assign or update a numerical rating (e.g., 1–5 stars)** to a finished item and **save a written review**.
 - As a user, I want to be able to see my **average rating** across all finished items of a media type
+- As a user, I want to be able to see the **percentage of items I have finished** relative to everything I have added to the library
 
