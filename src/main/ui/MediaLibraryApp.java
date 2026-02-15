@@ -176,7 +176,7 @@ public class MediaLibraryApp {
         String title = this.scanner.nextLine();
 
         System.out.println("\nNumber of Seasons: ");
-        int numSeasons = Integer.parseInt(this.scanner.nextLine());
+        int numSeasons = returnNumSeasons();
 
         System.out.println("\nGenre: ");
         String genre = this.scanner.nextLine();
@@ -198,34 +198,6 @@ public class MediaLibraryApp {
         System.out.println("\n" + newTV);
     }
 
-    // EFFECTS: prompts user for a status choice and returns the status
-    public Status returnStatusChoice() {
-        System.out.println("1: " + Status.WANT_TO.getLabel());
-        System.out.println("2: " + Status.IN_PROGRESS.getLabel());
-        System.out.println("3: " + Status.FINISHED.getLabel());
-        System.out.println("4: " + Status.DNF.getLabel());
-        int choice = Integer.parseInt(this.scanner.nextLine());
-        while (choice < 1 || choice > 4) {
-            System.out.println("Invalid choice. Try again.");
-            choice = Integer.parseInt(this.scanner.nextLine());
-        }
-        return processStatusChoice(choice);
-    }
-
-    // EFFECTS: process user's status menu
-    public Status processStatusChoice(int choice) {
-        switch (choice) {
-            case 1:
-                return Status.WANT_TO;
-            case 2:
-                return Status.IN_PROGRESS;
-            case 3:
-                return Status.FINISHED;
-            default:
-                return Status.DNF;
-        }
-    }
-
     // MODIFIES: this
     // EFFECTS: displays the view media menu and processes the user's command
     public void runViewMediaMenu() {
@@ -234,7 +206,17 @@ public class MediaLibraryApp {
         processViewMenuCommands(command);
     }
 
-    // MODIFIES: this 
+    // EFFECTS: displays the menu of options of viewing media items to user
+    public void displayViewMediaMenu() {
+        System.out.println("\n===== VIEWING MEDIA =====");
+        System.out.println("Filter view: ");
+        System.out.println("1: View all media");
+        System.out.println("2: View by type: Book/Movie/TV");
+        System.out.println("3: View by status");
+        System.out.println("4: Return to Main Menu");
+    }
+
+    // MODIFIES: this
     // EFFECTS: processes the user's view menu command
     public void processViewMenuCommands(String command) {
         switch (command) {
@@ -260,16 +242,6 @@ public class MediaLibraryApp {
         }
     }
 
-    // EFFECTS: displays the menu of options of viewing media items to user
-    public void displayViewMediaMenu() {
-        System.out.println("\n===== VIEWING MEDIA =====");
-        System.out.println("Filter view: ");
-        System.out.println("1: View all media");
-        System.out.println("2: View by type: Book/Movie/TV");
-        System.out.println("3: View by status");
-        System.out.println("4: Return to Main Menu");
-    }
-
     // EFFECTS: prints the given list of media items
     public void printMedia(List<Media> toPrint) {
         if (toPrint.isEmpty()) {
@@ -282,7 +254,6 @@ public class MediaLibraryApp {
         }
     }
 
-    // MODIFIES: this
     // EFFECTS: displays the view by status menu and processes the user's command
     public void runStatusViewMenu() {
         System.out.println("\n----- Select Status -----");
@@ -290,19 +261,19 @@ public class MediaLibraryApp {
 
         switch (command) {
             case WANT_TO:
-                System.out.println("\n===== WANT TO READ/WATCH =====");
+                System.out.println("\n===== Want to Read/Watch =====");
                 printMedia(mediaLibrary.filterByStatus(command));
                 break;
             case IN_PROGRESS:
-                System.out.println("\n===== CURRENTLY READING/WATCHING =====");
+                System.out.println("\n===== Currently Reading/Watching =====");
                 printMedia(mediaLibrary.filterByStatus(command));
                 break;
             case FINISHED:
-                System.out.println("\n===== FINISHED =====");
+                System.out.println("\n===== Finished =====");
                 printMedia(mediaLibrary.filterByStatus(command));
                 break;
             case DNF:
-                System.out.println("\n===== DID NOT FINISH =====");
+                System.out.println("\n===== Did Not Finish =====");
                 printMedia(mediaLibrary.filterByStatus(command));
                 break;
             default:
@@ -334,9 +305,18 @@ public class MediaLibraryApp {
         }
     }
 
+    // EFFECTS: displays the menu of options of viewing media items by type to user
+    public void displayTypeMenu() {
+        System.out.println("\n----- Select Media Type -----");
+        System.out.println("1: Books");
+        System.out.println("2: Movies");
+        System.out.println("3: TV Shows");
+        System.out.println("4: Return to previous Menu");
+    }
+
     // EFFECTS: displays the books menu and processes the user's command
     public void runBooks() {
-        System.out.println("\n===== BOOKS =====");
+        System.out.println("\n===== Books =====");
         System.out.println("1: View all Books");
         System.out.println("2: Filter Books by Status");
         String command = scanner.nextLine();
@@ -345,7 +325,7 @@ public class MediaLibraryApp {
 
     // EFFECTS: displays the movies menu and processes the user's command
     public void runMovies() {
-        System.out.println("\n===== MOVIES =====");
+        System.out.println("\n===== Movies =====");
         System.out.println("1: View all Movies");
         System.out.println("2: Filter Movies by Status");
         String command = scanner.nextLine();
@@ -366,13 +346,13 @@ public class MediaLibraryApp {
     public void processTypeMenuCommands(String command, String type) {
         switch (command) {
             case "1":
-                System.out.println();
+                System.out.println("\n----- " + "All " + type + "s -----");
                 printMedia(mediaLibrary.filterByType(type));
                 break;
             case "2":
-                System.out.println("\n----- Select Status -----");
+                System.out.println("\nChoose status to filter by: ");
                 Status status = returnStatusChoice();
-                System.out.println();
+                System.out.println("\n----- " + type + "s: " + status.getLabel() + " -----");
                 printMedia(mediaLibrary.filterByTypeAndStatus(type, status));
                 break;
             default:
@@ -380,42 +360,47 @@ public class MediaLibraryApp {
         }
     }
 
-    // EFFECTS: displays the menu of options of viewing media items by type to user
-    public void displayTypeMenu() {
-        System.out.println("\n----- Select Media Type -----");
-        System.out.println("1: Books");
-        System.out.println("2: Movies");
-        System.out.println("3: TV Shows");
-        System.out.println("4: Return to previous Menu");
-    }
-
     // MODIFIES: this, media
-    // EFFECTS: displays update media menu and lets user select a media item to update
+    // EFFECTS: displays update media menu and lets user select a media item to
+    // update
     public void runUpdateMediaMenu() {
         System.out.println("\n===== UPDATE MEDIA =====");
-        List<Media> lib = mediaLibrary.getAllMedia();
-        if (lib.isEmpty()) {
-            printMedia(lib);
+        if (mediaLibrary.getAllMedia().isEmpty()) {
+            System.out.println("\nYour library is empty. Try logging a new media item before updating!");
             return;
-        } else {
-            printMedia(lib);
-            System.out.println("Enter number of media to update");
-            int choice = Integer.parseInt(scanner.nextLine());
-
-            while (choice < 1 || choice > lib.size()) {
-                System.out.println("Invalid choice. Try again.");
-                choice = Integer.parseInt(scanner.nextLine());
-            }
-            Media selected = lib.get(choice - 1);
-
-            System.out.println("\nWhat do you want to update?");
-            System.out.println("1: Status");
-            System.out.println("2: Rating");
-            System.out.println("3: Review");
-            System.out.println("4: Delete Entry");
-            String command = scanner.nextLine(); // can the scanner read an int?
-            processUpdateCommand(command, selected);
         }
+        Media selected = returnUpdateMediaNum();
+
+        System.out.println("\nWhat do you want to update?");
+        System.out.println("1: Status");
+        System.out.println("2: Rating");
+        System.out.println("3: Review");
+        System.out.println("4: Delete Entry");
+        String command = scanner.nextLine();
+        processUpdateCommand(command, selected);
+    }
+
+    // REQUIRES: media library is not empty
+    // EFFECTS: prompts user for media number until recieves int between 1 and size
+    // of library,
+    // and returns that media ite,
+    public Media returnUpdateMediaNum() {
+        List<Media> lib = mediaLibrary.getAllMedia();
+        printMedia(lib);
+        System.out.println("Enter the number of the media to update: ");
+        int choice = 0;
+        while (true) {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                if (choice >= 1 && choice <= lib.size()) {
+                    break;
+                }
+                System.out.println("Invalid choice. Try again.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please enter an integer.");
+            }
+        }
+        return lib.get(choice - 1);
     }
 
     // MODIFIES: this, media
@@ -433,6 +418,7 @@ public class MediaLibraryApp {
                 break;
             case "4":
                 mediaLibrary.deleteEntry(media);
+                System.out.println("\nEntry deleted successfully!");
                 break;
             default:
                 System.out.println("Invalid. Please select one of the following: 1 2 3 4");
@@ -454,44 +440,9 @@ public class MediaLibraryApp {
             String review = returnReview();
             media.setReview(review);
         }
-        System.out.println("Status updated successfully!");
+        System.out.println("\nStatus updated successfully!");
+        System.out.println("\nYour updated entry: ");
         System.out.println(media);
-    }
-
-    // EFFECTS: prompts user for an integer rating 1-5 until valid input and returns
-    // that rating
-    public int returnRating() {
-        int rating = 0;
-        boolean validRating = false;
-
-        while (!validRating) {
-            if (!scanner.hasNextInt()) {
-                scanner.next();
-                System.out.println("Invalid input. Please enter an integer between 1-5: ");
-            } else {
-                int temp = Integer.parseInt(this.scanner.nextLine());
-                if (temp < 1 || temp > 5) {
-                    System.out.println("Invalid rating. Please enter an integer between 1-5: ");
-                } else {
-                    rating = temp;
-                    validRating = true;
-                }
-            }
-        }
-        return rating;
-    }
-
-    // REQUIRES: user ends review by entering a line equal to "end"
-    // EFFECTS: reads lines from user until "end", returns concatenated string
-    public String returnReview() {
-        String review = "";
-        String line = scanner.nextLine();
-
-        while (!line.equals("end")) {
-            review += line + "\n";
-            line = scanner.nextLine();
-        }
-        return review;
     }
 
     // MODIFIES: media
@@ -505,7 +456,8 @@ public class MediaLibraryApp {
         System.out.println("\nEnter your new rating: ");
         int rating = returnRating();
         media.setRating(rating);
-        System.out.println("Rating updated successfully!");
+        System.out.println("\nRating updated successfully!");
+        System.out.println("\nYour updated entry: ");
         System.out.println(media);
     }
 
@@ -520,7 +472,8 @@ public class MediaLibraryApp {
         System.out.println("\nEnter your new review (enter line \"end\" to finish review): ");
         String review = returnReview();
         media.setReview(review);
-        System.out.println("Review updated successfully!");
+        System.out.println("\nReview updated successfully!");
+        System.out.println("\nYour updated entry: ");
         System.out.println(media);
     }
 
@@ -534,31 +487,59 @@ public class MediaLibraryApp {
         printAvgRatings();
         System.out.println();
         System.out.println("--------------------------");
-        printFavs();
+        printFavsByType();
     }
 
     // EFFECTS: prints completion rate and counts of finished items by type
     public void printCompletionInfo() {
         double percent = (double) mediaLibrary.getNumFinished() / mediaLibrary.getTotalNumberItems() * 100;
         System.out.println("\nWhat is your completion rate?");
-        System.out.println("Percentage of items finished: " + percent + "%");
-        System.out.println(
-                "Number of books finished: " + mediaLibrary.filterByTypeAndStatus("Book", Status.FINISHED).size());
-        System.out.println(
-                "Number of movies finished: " + mediaLibrary.filterByTypeAndStatus("Movie", Status.FINISHED).size());
+        if (mediaLibrary.getTotalNumberItems() == 0) {
+            System.out.println("Percentage of items finished: N/A (no media logged)");
+        } else {
+            System.out.println("Percentage of items finished: " + percent + "%");
+        }
+        System.out.println("Number of books finished: "
+                + mediaLibrary.filterByTypeAndStatus("Book", Status.FINISHED).size());
+        System.out.println("Number of movies finished: "
+                + mediaLibrary.filterByTypeAndStatus("Movie", Status.FINISHED).size());
         System.out.println("Number of tv shows finished: "
                 + mediaLibrary.filterByTypeAndStatus("TV Show", Status.FINISHED).size());
     }
 
-    // EFFECTS: prints average ratings by type
+    // EFFECTS: prints all average ratings by type, or N/A if no finished items of
+    // that type
     public void printAvgRatings() {
         System.out.println("\nYour Average Ratings");
-        double bookAvg = mediaLibrary.getAverageRating(mediaLibrary.filterByType("Book"));
-        double movieAvg = mediaLibrary.getAverageRating(mediaLibrary.filterByType("Movie"));
-        double tvAvg = mediaLibrary.getAverageRating(mediaLibrary.filterByType("TV Show"));
-        System.out.println("By Books: " + bookAvg);
-        System.out.println("By Movies: " + movieAvg);
-        System.out.println("By TV Shows: " + tvAvg);
+        double bookAvg = mediaLibrary.getAverageRating(mediaLibrary.filterByTypeAndStatus("Book", Status.FINISHED));
+        double movieAvg = mediaLibrary.getAverageRating(mediaLibrary.filterByTypeAndStatus("Movie", Status.FINISHED));
+        double tvAvg = mediaLibrary.getAverageRating(mediaLibrary.filterByTypeAndStatus("TV Show", Status.FINISHED));
+        printAvgRatingByType("Book", bookAvg);
+        printAvgRatingByType("Movie", movieAvg);
+        printAvgRatingByType("TV Show", tvAvg);
+    }
+
+    // EFFECTS: prints average of given type, or N/A if average is 0.0
+    // (no finished items of that type)
+    public void printAvgRatingByType(String type, double avg) {
+        if (avg == 0.0) {
+            System.out.println("By " + type + "s: N/A");
+        } else {
+            System.out.println("By " + type + "s: " + avg);
+        }
+    }
+
+    // EFFECTS: prints 5-star items for Books, Movies, and TV Shows
+    public void printFavsByType() {
+        List<Media> favBooks = getFavs("Book");
+        List<Media> favMovies = getFavs("Movie");
+        List<Media> favShows = getFavs("TV Show");
+
+        System.out.println("\nYour Overall Favourites");
+        System.out.println("Everything you thought deserved 5 stars...");
+        printFavs("Book", favBooks);
+        printFavs("Movie", favMovies);
+        printFavs("TV Show", favShows);
     }
 
     // EFFECTS: returns list of media of the given type that have a rating of 5
@@ -582,17 +563,89 @@ public class MediaLibraryApp {
         }
     }
 
-    // EFFECTS: prints 5-star items for Books, Movies, and TV Shows
-    public void printFavs() {
-        List<Media> favBooks = getFavs("Book");
-        List<Media> favMovies = getFavs("Movie");
-        List<Media> favShows = getFavs("TV Show");
+    // EFFECTS: prompts user for a status choice and returns the status
+    public Status returnStatusChoice() {
+        System.out.println("1: " + Status.WANT_TO.getLabel());
+        System.out.println("2: " + Status.IN_PROGRESS.getLabel());
+        System.out.println("3: " + Status.FINISHED.getLabel());
+        System.out.println("4: " + Status.DNF.getLabel());
+        while (true) {
+            try {
+                int choice = Integer.parseInt(this.scanner.nextLine());
+                if (choice >= 1 && choice <= 4) {
+                    return processStatusChoice(choice);
+                }
+                System.out.println("Invalid choice. Try again.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
 
-        System.out.println("\nYour Overall Favourites");
-        System.out.println("Everything you thought deserved 5 stars...");
-        printFavs("Book", favBooks);
-        printFavs("Movie", favMovies);
-        printFavs("TV Show", favShows);
+    // EFFECTS: process user's status menu
+    public Status processStatusChoice(int choice) {
+        switch (choice) {
+            case 1:
+                return Status.WANT_TO;
+            case 2:
+                return Status.IN_PROGRESS;
+            case 3:
+                return Status.FINISHED;
+            default:
+                return Status.DNF;
+        }
+    }
+
+    // EFFECTS: prompts user for rating until recieves integer rating between 1-5
+    // and returns that rating
+    public int returnRating() {
+        int rating = 0;
+        boolean validRating = false;
+
+        while (!validRating) {
+            String input = scanner.nextLine();
+            try {
+                int temp = Integer.parseInt(input);
+                if (temp < 1 || temp > 5) {
+                    System.out.println("Invalid rating. Please enter an integer between 1-5: ");
+                } else {
+                    rating = temp;
+                    validRating = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter an integer between 1-5: ");
+            }
+        }
+        return rating;
+    }
+
+    // REQUIRES: user ends review by entering a line equal to "end"
+    // EFFECTS: reads lines from user until "end" and returns review string
+    public String returnReview() {
+        String review = "";
+        String line = scanner.nextLine();
+
+        while (!line.equals("end")) {
+            review += line + "\n";
+            line = scanner.nextLine();
+        }
+        return review;
+    }
+
+    // EFFECTS: prompts user for number of seasons until recieves a non-negative
+    // integer, and returns that number
+    public int returnNumSeasons() {
+        while (true) {
+            try {
+                int num = Integer.parseInt(scanner.nextLine());
+                if (num >= 0) {
+                    return num;
+                }
+                System.out.println("Invalid input. Please enter a non-negative integer: ");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter an integer: ");
+            }
+        }
     }
 
 }
