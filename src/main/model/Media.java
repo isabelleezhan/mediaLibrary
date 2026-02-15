@@ -1,7 +1,7 @@
 package model;
 
 // Represents a single media entry (book/movie/tvshow) having a title,
-// genre, consumption status, and optional rating (1-5) + review
+// genre, consumption status, and rating + review
 public abstract class Media {
 
     private String title;
