@@ -69,6 +69,9 @@ public class MediaLibrary {
     // or returns 0.0 if there are no ratings
     public double getAverageRating(List<Media> mediaList) { 
         double totalRating = 0.0;
+        if (mediaList.size() == 0) {
+            return totalRating;
+        }
         for (Media m : mediaList) {
             totalRating += m.getRating();
         }

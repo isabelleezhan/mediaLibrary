@@ -52,6 +52,7 @@ public class MediaLibraryTest {
         assertEquals(testLibrary.getTotalNumberItems(), 3);
         assertFalse(testLibrary.getAllMedia().contains(item2));
 
+        // test when media item is not in medialibrary 
         testLibrary.deleteEntry(item2);
         assertEquals(testLibrary.getTotalNumberItems(), 3);
     }
@@ -121,6 +122,14 @@ public class MediaLibraryTest {
 
         List<Media> movies = testLibrary.filterByType("Movie");
         assertEquals(testLibrary.getAverageRating(movies), 0.0);
+    }
+
+    @Test
+    void testGetAverageRatingEmpty() {
+        assertEquals(testLibrary.getNumFinished(), 0);
+
+        List<Media> finished = testLibrary.filterByStatus(Status.FINISHED);
+        assertEquals(testLibrary.getAverageRating(finished), 0.0);
     }
 
 }
