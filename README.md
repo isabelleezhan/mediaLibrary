@@ -18,4 +18,6 @@ Bookworms and movie/TV enthusiasts like myself who juggle extensive "To be Read"
 - As a user, I want to **assign or update a numerical rating (e.g., 1–5 stars)** to a finished item and **save a written review**.
 - As a user, I want to be able to see my **average rating** across all finished items of a media type
 - As a user, I want to be able to see the **percentage of items I have finished** relative to everything I have added to the library
+- As a user, when I select the quit option from the main menu, I want to be prompted to **save my media library** to file and have the option to do so or not
+- As a user, when I start the application, I want to be given the option to **load my media library** from file
 
