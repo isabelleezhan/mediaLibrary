@@ -2,11 +2,14 @@ package ui;
 
 import java.util.Scanner;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
 // A Media Library application that lets users track media items
+@ExcludeFromJacocoGeneratedReport
 public class MediaLibraryApp {
 
     private MediaLibrary mediaLibrary;
@@ -19,10 +22,10 @@ public class MediaLibraryApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes application with an empty media library
+    // EFFECTS: initializes application with an empty media library of given name
     public void init() {
-        this.mediaLibrary = new MediaLibrary();
         this.scanner = new Scanner(System.in);
+        this.mediaLibrary = new MediaLibrary();
     }
 
     // MODIFIES: this
@@ -73,7 +76,7 @@ public class MediaLibraryApp {
                 viewStatistics();
                 break;
             default:
-                System.out.println("Invalid. Please select one of the following: 1 2 3 4 5");
+                System.out.println("Invalid. Please select one of the following: 1-7");
         }
     }
 
@@ -646,6 +649,12 @@ public class MediaLibraryApp {
                 System.out.println("Invalid input. Please enter an integer: ");
             }
         }
+    }
+
+     // EFFECTS: saves the mediaLibrary to file in JSON_STORE;
+    // prints error message if unable to write
+    private void saveMediaLibrary() {
+        // stub
     }
 
 }
