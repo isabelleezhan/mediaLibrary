@@ -4,16 +4,22 @@ import java.util.Scanner;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
+import persistence.JsonReader;
 
 // A Media Library application that lets users track media items
 @ExcludeFromJacocoGeneratedReport
 public class MediaLibraryApp {
 
+    private String username;
+    private String jsonStore;
     private MediaLibrary mediaLibrary;
     private Scanner scanner;
+    private JsonReader jsonReader;
 
     // EFFECTS: creates an instance of the Medialibrary console ui
     public MediaLibraryApp() {
@@ -22,10 +28,27 @@ public class MediaLibraryApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes application with an empty media library of given name
+    // EFFECTS: initializes application with an empty media library of given name;
+    // if saved library of given name exists, offers to load it
     public void init() {
         this.scanner = new Scanner(System.in);
+        System.out.print("Welcome to MediaLibrary!");
+        System.out.println("\nEnter your username: ");
+        this.username = scanner.nextLine();
+        this.jsonStore = "./data/" + username + "_library.json";
+        this.jsonReader = new JsonReader(jsonStore);
+
+        if (new File(jsonStore).exists()) {
+            System.out.println("Found a saved library for " + username + ". Load it? (yes/no)");
+            String choice = scanner.nextLine().toLowerCase();
+            if (choice.equals("yes")) {
+                loadMediaLibrary();
+                System.out.println("Library loaded successfully!");
+                return;
+            } 
+        }
         this.mediaLibrary = new MediaLibrary();
+        System.out.println("Starting a new library...");
     }
 
     // MODIFIES: this
@@ -38,7 +61,13 @@ public class MediaLibraryApp {
             displayMainMenu();
             command = scanner.nextLine();
 
-            if (command.equals("5")) {
+            if (command.equals("7")) {
+                System.out.println("Would you like to save your library? (yes/no)");
+                String choice = scanner.nextLine().toLowerCase();
+                if (choice.equals("yes")) {
+                    saveMediaLibrary();
+                    System.out.println("Library saved successfully!");
+                }
                 System.out.println("Thanks for visiting MediaLibrary :)");
                 System.out.println("See you next time!");
                 keepGoing = false;
@@ -56,7 +85,8 @@ public class MediaLibraryApp {
         System.out.println("2: View library");
         System.out.println("3: Update media item");
         System.out.println("4: See user statistics");
-        System.out.println("5: Quit application");
+        System.out.println("5: Load workroom from file");
+        System.out.println("6: Quit application");
     }
 
     // MODIFIES: this
@@ -74,6 +104,9 @@ public class MediaLibraryApp {
                 break;
             case "4":
                 viewStatistics();
+                break;
+            case "5":
+                loadMediaLibrary();
                 break;
             default:
                 System.out.println("Invalid. Please select one of the following: 1-7");
@@ -651,10 +684,16 @@ public class MediaLibraryApp {
         }
     }
 
+    // Based on: JsonSerializationDemo
     // MODIFIES: this
-    // EFFECTS: loads mediaLibrary from file, or prints
-    // error message if unable to read
+    // EFFECTS: loads mediaLibrary from file in jsonStore;
+    // prints error message if unable to read
     private void loadMediaLibrary() {
-        // stub
+        try {
+            mediaLibrary = jsonReader.read();
+            System.out.println("Loaded library from " + jsonReader.getSource());
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + jsonReader.getSource());
+        }
     }
 }
