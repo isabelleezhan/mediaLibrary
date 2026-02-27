@@ -651,10 +651,10 @@ public class MediaLibraryApp {
         }
     }
 
-     // EFFECTS: saves the mediaLibrary to file in JSON_STORE;
-    // prints error message if unable to write
-    private void saveMediaLibrary() {
+    // MODIFIES: this
+    // EFFECTS: loads mediaLibrary from file, or prints
+    // error message if unable to read
+    private void loadMediaLibrary() {
         // stub
     }
-
 }
