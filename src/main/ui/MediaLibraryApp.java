@@ -64,7 +64,7 @@ public class MediaLibraryApp {
             displayMainMenu();
             command = scanner.nextLine();
 
-            if (command.equals("7")) {
+            if (command.equals("6")) {
                 System.out.println("Would you like to save your library? (yes/no)");
                 String choice = scanner.nextLine().toLowerCase();
                 if (choice.equals("yes")) {
@@ -89,8 +89,7 @@ public class MediaLibraryApp {
         System.out.println("3: Update media item");
         System.out.println("4: See user statistics");
         System.out.println("5: Save library to file");
-        System.out.println("6: Load library from file");
-        System.out.println("7: Quit application");
+        System.out.println("6: Quit application");
     }
 
     // MODIFIES: this
@@ -112,11 +111,8 @@ public class MediaLibraryApp {
             case "5":
                 saveMediaLibrary();
                 break;
-            case "6":
-                loadMediaLibrary();
-                break;
             default:
-                System.out.println("Invalid. Please select one of the following: 1-7");
+                System.out.println("Invalid. Please select one of the following: 1-6");
         }
     }
 
