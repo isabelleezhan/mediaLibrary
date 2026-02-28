@@ -5,11 +5,13 @@ import java.util.Scanner;
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
 import persistence.JsonReader;
+import persistence.JsonWriter;
 
 // A Media Library application that lets users track media items
 @ExcludeFromJacocoGeneratedReport
@@ -19,6 +21,7 @@ public class MediaLibraryApp {
     private String jsonStore;
     private MediaLibrary mediaLibrary;
     private Scanner scanner;
+    private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     // EFFECTS: creates an instance of the Medialibrary console ui
@@ -28,14 +31,14 @@ public class MediaLibraryApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes application with an empty media library of given name;
-    // if saved library of given name exists, offers to load it
+    // EFFECTS: initializes application with an empty media library of given name
     public void init() {
         this.scanner = new Scanner(System.in);
         System.out.print("Welcome to MediaLibrary!");
         System.out.println("\nEnter your username: ");
         this.username = scanner.nextLine();
-        this.jsonStore = "./data/" + username + "_library.json";
+        this.jsonStore = "./data/" + username + "Library.json";
+        this.jsonWriter = new JsonWriter(jsonStore);
         this.jsonReader = new JsonReader(jsonStore);
 
         if (new File(jsonStore).exists()) {
@@ -85,8 +88,9 @@ public class MediaLibraryApp {
         System.out.println("2: View library");
         System.out.println("3: Update media item");
         System.out.println("4: See user statistics");
-        System.out.println("5: Load workroom from file");
-        System.out.println("6: Quit application");
+        System.out.println("5: Save library to file");
+        System.out.println("6: Load library from file");
+        System.out.println("7: Quit application");
     }
 
     // MODIFIES: this
@@ -106,6 +110,9 @@ public class MediaLibraryApp {
                 viewStatistics();
                 break;
             case "5":
+                saveMediaLibrary();
+                break;
+            case "6":
                 loadMediaLibrary();
                 break;
             default:
@@ -688,7 +695,14 @@ public class MediaLibraryApp {
     // EFFECTS: saves the mediaLibrary to file in jsonStore;
     // prints error message if unable to write
     private void saveMediaLibrary() {
-        // stub
+        try {
+            jsonWriter.open();
+            jsonWriter.write(mediaLibrary);
+            jsonWriter.close();
+            System.out.println("Saved library to " + jsonWriter.getFilePath());
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + jsonWriter.getFilePath());
+        }
     }
 
     // MODIFIES: this
@@ -702,4 +716,5 @@ public class MediaLibraryApp {
             System.out.println("Unable to read from file: " + jsonReader.getSource());
         }
     }
+
 }

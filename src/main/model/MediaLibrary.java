@@ -106,11 +106,17 @@ public class MediaLibrary implements Writable {
     // EFFECTS: returns media library as JSON object
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); // stub
+        JSONObject json = new JSONObject();
+        json.put("media", mediasToJson());
+        return json;
     }
 
     // EFFECTS: returns media in this media library as JSON array
     private JSONArray mediasToJson() {
-        return new JSONArray(); // stub
+        JSONArray jsonArray = new JSONArray();
+        for (Media m : allMedia) {
+            jsonArray.put(m.toJson());
+        }
+        return jsonArray;
     }
 }

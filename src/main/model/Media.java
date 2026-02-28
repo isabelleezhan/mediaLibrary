@@ -88,10 +88,17 @@ public abstract class Media implements Writable {
         }
     }
 
+    // Based on: JsonSerializationDemo
     // EFFECTS: returns media item written as JSON object 
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); // stub
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("genre", genre);
+        json.put("status", status);
+        json.put("review", review);
+        json.put("rating", rating);
+        return json;
     }
-
+    
 }

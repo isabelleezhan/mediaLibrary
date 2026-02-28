@@ -33,7 +33,9 @@ public class Movie extends Media {
     // EFFECTS: returns movie item written as JSON object 
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); // stub
+        JSONObject json = super.toJson();
+        json.put("director", director);
+        return json;
     }
 
 }

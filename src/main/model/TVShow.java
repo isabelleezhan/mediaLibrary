@@ -33,7 +33,9 @@ public class TVShow extends Media {
     // EFFECTS: returns tv show item written as JSON object 
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); // stub
+        JSONObject json = super.toJson();
+        json.put("number of seasons", numSeasons);
+        return json;
     }
 
 }

@@ -30,10 +30,12 @@ public class Book extends Media {
         return "Book";
     }
 
-    // EFFECTS: returns book item written as JSON object 
+    // Inspired by: JsonSerializationDemo
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); // stub
+        JSONObject json = super.toJson();
+        json.put("author", author);
+        return json;
     }
 
 }
