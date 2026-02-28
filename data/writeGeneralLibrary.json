@@ -1,0 +1,25 @@
+{"media": [
+    {
+        "review": "It was good!",
+        "director": "Chloe Zhao",
+        "genre": "Drama",
+        "rating": 4,
+        "title": "Hamnet",
+        "status": "FINISHED"
+    },
+    {
+        "review": "If only they stopped at season 4...",
+        "genre": "Fantasy",
+        "rating": 5,
+        "title": "Game of Thrones",
+        "number of seasons": 8,
+        "status": "FINISHED"
+    },
+    {
+        "author": "R.F. Kuang",
+        "genre": "Historical Fantasy",
+        "rating": 0,
+        "title": "Babel",
+        "status": "IN_PROGRESS"
+    }
+]}
