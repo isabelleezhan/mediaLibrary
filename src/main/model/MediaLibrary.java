@@ -1,11 +1,17 @@
 package model;
 
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // A collection of media entries (books, movies, TV shows) that supports
 // adding, removing, and filtering by type and consumption status.
-public class MediaLibrary {
+public class MediaLibrary implements Writable {
 
     private List<Media> allMedia;
 
@@ -28,7 +34,8 @@ public class MediaLibrary {
     }
 
     // REQUIRES: type is one of "Book", "Movie", "TV Show"
-    // EFFECTS: returns a new list of all media in this library whose type equals type
+    // EFFECTS: returns a new list of all media in this library whose type equals
+    // type
     public List<Media> filterByType(String type) {
         List<Media> filteredList = new ArrayList<Media>();
         for (Media m : allMedia) {
@@ -40,7 +47,8 @@ public class MediaLibrary {
     }
 
     // REQUIRES: type is one of "Book", "Movie", "TV Show"
-    // EFFECTS: returns a new list of all media in this library with the given status
+    // EFFECTS: returns a new list of all media in this library with the given
+    // status
     public List<Media> filterByStatus(Status status) {
         List<Media> filteredList = new ArrayList<Media>();
         for (Media m : allMedia) {
@@ -52,8 +60,8 @@ public class MediaLibrary {
     }
 
     // REQUIRES: type is one of "Book", "Movie", "TV Show"
-    // EFFECTS: returns a new list of all media in this library whose type equals type
-    //          and whose status equals status
+    // EFFECTS: returns a new list of all media in this library whose type equals
+    // type and whose status equals status
     public List<Media> filterByTypeAndStatus(String type, Status status) {
         List<Media> filteredList = new ArrayList<Media>();
         for (Media m : allMedia) {
@@ -67,7 +75,7 @@ public class MediaLibrary {
     // REQUIRES: mediaList is not null and all items must be of status "Finished"
     // EFFECTS: returns the average rating of all finished media items in the list
     // or returns 0.0 if there are no ratings
-    public double getAverageRating(List<Media> mediaList) { 
+    public double getAverageRating(List<Media> mediaList) {
         double totalRating = 0.0;
         if (mediaList.size() == 0) {
             return totalRating;
@@ -92,6 +100,17 @@ public class MediaLibrary {
     public List<Media> getAllMedia() {
         return allMedia;
     }
+
+    // Based on: JsonSerializationDemo
+
+    // EFFECTS: returns media library as JSON object
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); // stub
+    }
+
+    // EFFECTS: returns media in this media library as JSON array
+    private JSONArray mediasToJson() {
+        return new JSONArray(); // stub
+    }
 }
-
-

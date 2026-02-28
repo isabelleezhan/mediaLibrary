@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a movie in the media library
 public class Movie extends Media {
 
@@ -26,6 +28,12 @@ public class Movie extends Media {
     @Override
     public String getMediaType() {
         return "Movie";
+    }
+
+    // EFFECTS: returns movie item written as JSON object 
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); // stub
     }
 
 }

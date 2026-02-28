@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a TV show in the media library
 public class TVShow extends Media {
 
@@ -26,6 +28,12 @@ public class TVShow extends Media {
     @Override
     public String getMediaType() {
         return "TV Show";
+    }
+
+    // EFFECTS: returns tv show item written as JSON object 
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); // stub
     }
 
 }

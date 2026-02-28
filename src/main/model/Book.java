@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a book in the media library
 public class Book extends Media {
 
@@ -26,6 +28,12 @@ public class Book extends Media {
     @Override
     public String getMediaType() {
         return "Book";
+    }
+
+    // EFFECTS: returns book item written as JSON object 
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); // stub
     }
 
 }

@@ -685,6 +685,12 @@ public class MediaLibraryApp {
     }
 
     // Based on: JsonSerializationDemo
+    // EFFECTS: saves the mediaLibrary to file in jsonStore;
+    // prints error message if unable to write
+    private void saveMediaLibrary() {
+        // stub
+    }
+
     // MODIFIES: this
     // EFFECTS: loads mediaLibrary from file in jsonStore;
     // prints error message if unable to read

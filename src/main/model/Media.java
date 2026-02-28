@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a single media entry (book/movie/tvshow) having a title,
 // genre, consumption status, and rating + review
-public abstract class Media {
+public abstract class Media implements Writable {
 
     private String title;
     private String genre;
@@ -83,6 +86,12 @@ public abstract class Media {
         } else {
             return info;
         }
+    }
+
+    // EFFECTS: returns media item written as JSON object 
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); // stub
     }
 
 }
