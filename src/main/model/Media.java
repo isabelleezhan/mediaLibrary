@@ -88,7 +88,6 @@ public abstract class Media implements Writable {
         }
     }
 
-    // Based on: JsonSerializationDemo
     // EFFECTS: returns media item written as JSON object 
     @Override
     public JSONObject toJson() {

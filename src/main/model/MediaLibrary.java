@@ -101,8 +101,6 @@ public class MediaLibrary implements Writable {
         return allMedia;
     }
 
-    // Based on: JsonSerializationDemo
-
     // EFFECTS: returns media library as JSON object
     @Override
     public JSONObject toJson() {
