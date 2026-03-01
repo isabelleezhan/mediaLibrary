@@ -3,13 +3,10 @@ package persistence;
 import model.MediaLibrary;
 import org.json.JSONObject;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
-
 import java.io.*;
 
 // Based on: JsonSerializationDemo
 // Represents a writer that writes the JSON representation of mediaLibrary to file 
-@ExcludeFromJacocoGeneratedReport
 public class JsonWriter {
 
     private static final int TAB = 4; 

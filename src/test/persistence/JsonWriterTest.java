@@ -46,6 +46,7 @@ public class JsonWriterTest extends JsonTest {
         try {
             ml = new MediaLibrary();
             writer = new JsonWriter("./data/writeEmpty.json");
+            assertEquals("./data/writeEmpty.json", writer.getFilePath());
             writer.open();
             writer.write(ml);
             writer.close();
