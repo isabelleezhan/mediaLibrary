@@ -18,6 +18,10 @@ public class TVShow extends Media {
         return numSeasons;
     }
 
+    public void setNumSeasons(int numSeasons) {
+        this.numSeasons = numSeasons;
+    }
+
     // EFFECTS: returns number of seasons
     @Override
     public String getDisplayInfo() {
@@ -30,7 +34,7 @@ public class TVShow extends Media {
         return "TV Show";
     }
 
-    // EFFECTS: returns tv show item written as JSON object 
+    // EFFECTS: returns tv show item written as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = super.toJson();

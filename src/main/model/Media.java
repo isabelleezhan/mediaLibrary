@@ -13,6 +13,8 @@ public abstract class Media implements Writable {
     private String review;
     private int rating;
 
+    private String coverImagePath;
+
     // EFFECTS: constructs media item with title, genre, consumption status, empty
     // review, and zero rating
     public Media(String title, Status status, String genre) {
@@ -21,6 +23,7 @@ public abstract class Media implements Writable {
         this.status = status;
         this.review = null;
         this.rating = 0; // no rating
+        this.coverImagePath = null;
     }
 
     // MODIFIES: this
@@ -39,6 +42,10 @@ public abstract class Media implements Writable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void setCoverImagePath(String path) {
+        this.coverImagePath = path;
     }
 
     // getters - don't need specification
@@ -60,6 +67,10 @@ public abstract class Media implements Writable {
 
     public int getRating() {
         return rating;
+    }
+
+    public String getCoverImagePath() {
+        return coverImagePath;
     }
 
     // EFFECTS: returns the media type name (e.g. "Book", "Movie", "TV Show")
@@ -88,6 +99,7 @@ public abstract class Media implements Writable {
         }
     }
 
+    // Based on: JsonSerializationDemo
     // EFFECTS: returns media item written as JSON object 
     @Override
     public JSONObject toJson() {
@@ -97,6 +109,7 @@ public abstract class Media implements Writable {
         json.put("status", status);
         json.put("review", review);
         json.put("rating", rating);
+        json.put("coverImagePath", coverImagePath != null ? coverImagePath : "");
         return json;
     }
     

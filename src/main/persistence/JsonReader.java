@@ -67,7 +67,7 @@ public class JsonReader {
         String title = json.getString("title");
         String genre = json.getString("genre");
         Status status = Status.valueOf(json.getString("status"));
-        
+
         Media media = null;
         if (json.has("author")) {
             String author = json.getString("author");
@@ -87,6 +87,12 @@ public class JsonReader {
         if (json.has("review")) {
             String review = json.getString("review");
             media.setReview(review);
+        }
+        if (json.has("coverImagePath")) {
+            String path = json.getString("coverImagePath");
+            if (!path.isEmpty()) {
+                media.setCoverImagePath(path);
+            }
         }
         ml.addEntry(media);
     }

@@ -1,0 +1,49 @@
+{
+  "name": "Cute Pink Light",
+  "base": "com.formdev.flatlaf.themes.FlatMacLightLaf",
+  "dark": false,
+  "author": "Ingo Steinke (openmindculture)",
+  "editorScheme": "/cute_pink_light.xml",
+  "colors": {
+    "whiteBg": "#FFFFFF",
+    "pinkDeepBg": "#F14874",
+    "whiteText": "#FFFFFF",
+    "pinkLightBg": "#FFFFFC", 
+    "pinkMediumBg": "#FCDEE9",
+    "pinkDarkBg": "#F075AE",
+    "purpleLightText": "#A192AB",
+    "purpleMediumText": "#826585",
+    "purpleDarkText": "#161015",
+    "purpleRedBorder": "#F075AE",
+    "purpleRedFocusRect": "#F26D90"
+  },
+  "ui": {
+    "*": {
+      "background": "pinkLightBg",
+      "selectedBackground": "pinkMediumBg",
+      "hoverBackground": "pinkDarkBg",
+      "foreground": "purpleDarkText",
+      "disabledText": "purpleLightText",
+      "selectionBackground": "pinkDeepBg",
+      "selectionForeground": "whiteText",
+      "underlineColor": "purpleRedBorder",
+      "errorFocusColor": "purpleRedFocusRect"
+    },
+    "Editor.background": "whiteBg",
+    "Button.default.foreground": "whiteText",
+    "Borders": {
+      "color": "whiteBg",
+      "ContrastBorderColor": "purpleRedBorder"
+    },
+    "Panel.foreground": "purpleDarkText",
+    "Panel.foreground.hover": "purpleDarkText",
+    "Panel.hoverForeground": "purpleDarkText",
+    "ScrollPane.background": "whiteBg",
+    "ScrollPane.foreground": "purpleDarkText",
+    "TextArea.foreground": "purpleDarkText",
+    "TextField.background": "whiteBg",
+    "TextField.foreground": "purpleDarkText",
+    "TextField.inactiveForeground": "purpleDarkText",
+    "Viewport.foreground": "purpleDarkText"
+  }
+}
