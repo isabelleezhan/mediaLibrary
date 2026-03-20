@@ -21,3 +21,12 @@ Bookworms and movie/TV enthusiasts like myself who juggle extensive "To be Read"
 - As a user, when I select the quit option from the main menu, I want to be prompted to **save my media library** to file and have the option to do so or not
 - As a user, when I start the application, I want to be given the option to **load my media library** from file
 
+## Instructions for End User
+- You can view the **library panel** that displays the media items that have **already been added** to your media library upon opening the application
+- Satisfying the first user criteria.. you can add a media item to your library by pressing the "Add Media" button on the top right corner 
+- Satisfying the second user criteria.. you can **filter the view by status and media type** by selecting your filters from the dropdown menu at the top of the **library panel**
+- You can locate my visual component—a bar graph and pie chart—by clicking the tab labelled "Stats"
+- You can save the state of my application upon close by selecting "yes" to saving your library
+- You can load the state of my application upon entering your username at startup and selecting "yes" to loading your saved library
+- You can edit a media item by pressing on the entry in the library panel
+- You can choose a cover image for a media item by right-clicking on the media item entry in the library panel
