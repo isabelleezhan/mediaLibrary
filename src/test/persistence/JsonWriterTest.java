@@ -24,6 +24,7 @@ public class JsonWriterTest extends JsonTest {
     void setUp() {
         hamnet = new Movie("Hamnet", Status.FINISHED, "Chloe Zhao", "Drama");
         hamnet.setRating(4);
+        hamnet.setCoverImagePath("/data/dune");
         hamnet.setReview("It was good!");
         got = new TVShow("Game of Thrones", Status.FINISHED, 8, "Fantasy");
         got.setRating(5);
@@ -78,6 +79,7 @@ public class JsonWriterTest extends JsonTest {
             assertEquals(3, lib.size());
             checkMovie((Movie) lib.get(0), "Hamnet", "Drama", Status.FINISHED, "Chloe Zhao");
             checkRatingAndReview(lib.get(0), "It was good!", 4);
+            checkCoverImagePath(lib.get(0), "/data/dune");
             checkTVShow((TVShow) lib.get(1), "Game of Thrones", "Fantasy", Status.FINISHED, 8);
             checkRatingAndReview(lib.get(1), "If only they stopped at season 4...", 5);
             checkBook((Book) lib.get(2), "Babel", "Historical Fantasy", Status.IN_PROGRESS, "R.F. Kuang");

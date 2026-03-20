@@ -25,6 +25,7 @@ public class BookTest {
         assertEquals(testBook.getGenre(), "Fantasy");
         assertNull(testBook.getReview());
         assertEquals(testBook.getRating(), 0);
+        assertNull(testBook.getCoverImagePath());
     }
 
     @Test
@@ -52,6 +53,12 @@ public class BookTest {
     void testSetReview() {
         testBook.setReview("This book was so good!");
         assertEquals(testBook.getReview(), "This book was so good!");
+    }
+
+    @Test
+    public void testSetCoverImagePath() {
+        testBook.setCoverImagePath("/images/dune.png");
+        assertEquals("/images/dune.png", testBook.getCoverImagePath());
     }
 
     @Test

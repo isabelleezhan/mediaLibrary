@@ -20,6 +20,10 @@ public class JsonTest {
         assertEquals(rating, media.getRating());
     }
 
+    protected void checkCoverImagePath(Media media, String imagePath) {
+        assertEquals(imagePath, media.getCoverImagePath());
+    }
+
     protected void checkBook(Book book, String title, String genre, Status status, String author) {
         checkMedia(book, title, genre, status);
         assertEquals(author, book.getAuthor());

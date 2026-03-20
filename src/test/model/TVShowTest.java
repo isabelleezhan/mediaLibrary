@@ -33,6 +33,13 @@ public class TVShowTest {
     }
 
     @Test
+    void testSetNumSeasons() {
+        testTV.setNumSeasons(3);
+
+        assertEquals(3, testTV.getNumSeasons());
+    }
+
+    @Test
     void testToStringFinished() {
         testTV.setRating(5);
         testTV.setReview("An all time favourite!");
