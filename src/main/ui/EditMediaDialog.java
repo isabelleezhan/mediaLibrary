@@ -19,7 +19,8 @@ public class EditMediaDialog extends JDialog {
     private JSpinner numSeasonsSpinner;
     private JPanel ratingReviewPanel;
 
-    // EFFECTS: constructs the Edit Media dialog pre-filled with the given media item
+    // EFFECTS: constructs the Edit Media dialog pre-filled with the given media
+    // item
     public EditMediaDialog(JFrame parent, Media media) {
         super(parent, "Edit: " + media.getTitle(), true);
         this.media = media;
@@ -65,7 +66,8 @@ public class EditMediaDialog extends JDialog {
     }
 
     // MODIFIES: main
-    // EFFECTS: adds a non-editable genre field pre-filled with media's genre to main
+    // EFFECTS: adds a non-editable genre field pre-filled with media's genre to
+    // main
     private void addGenreField(JPanel main) {
         JTextField genreField = new JTextField(media.getGenre());
         genreField.setFont(MediaLibraryGUI.REGULAR);
@@ -76,7 +78,8 @@ public class EditMediaDialog extends JDialog {
     }
 
     // MODIFIES: main
-    // EFFECTS: adds a status dropdown box pre-filled with media's current status to main
+    // EFFECTS: adds a status dropdown box pre-filled with media's current status to
+    // main
     private void addStatusCombo(JPanel main) {
         statusCombo = new JComboBox<>(Status.values());
         statusCombo.setSelectedItem(media.getStatus());
@@ -88,7 +91,7 @@ public class EditMediaDialog extends JDialog {
 
     // MODIFIES: main
     // EFFECTS: adds the type-specific field (author/director/seasons)
-    //          pre-filled with media's values to main
+    // pre-filled with media's values to main
     private void addTypeSpecificField(JPanel main) {
         if (media instanceof Book) {
             JTextField authorField = new JTextField(((Book) media).getAuthor());
@@ -109,7 +112,7 @@ public class EditMediaDialog extends JDialog {
     }
 
     // EFFECTS: returns a new panel containing rating and review fields
-    //          pre-filled with media's existing rating and review
+    // pre-filled with media's existing rating and review
     private JPanel createRatingReviewPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -189,9 +192,9 @@ public class EditMediaDialog extends JDialog {
 
     // MODIFIES: this
     // EFFECTS: updates media's number of seasons if media is a TVShow
-    //          and numSeasonsSpinner is not null
+    // and numSeasonsSpinner is not null
     private void updateSeasonsIfTVShow() {
-       if (media instanceof TVShow && numSeasonsSpinner != null) {
+        if (media instanceof TVShow && numSeasonsSpinner != null) {
             ((TVShow) media).setNumSeasons((int) numSeasonsSpinner.getValue());
         }
     }
@@ -210,7 +213,7 @@ public class EditMediaDialog extends JDialog {
     }
 
     // EFFECTS: prompts user to confirm deletion; if confirmed, removes media
-    //          from library, sets confirmed to true, and closes dialog
+    // from library, sets confirmed to true, and closes dialog
     private void handleDelete() {
         int choice = JOptionPane.showConfirmDialog(this,
                 "Are you sure you want to delete \"" + media.getTitle() + "\"?",
@@ -223,7 +226,7 @@ public class EditMediaDialog extends JDialog {
     }
 
     // EFFECTS: returns a labeled row panel with labelText on the left
-    //          and field on the right
+    // and field on the right
     private JPanel makeLabeledRow(String labelText, JComponent field) {
         JPanel row = new JPanel(new BorderLayout(8, 0));
         row.setOpaque(false);

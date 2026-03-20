@@ -60,7 +60,7 @@ public class AddMediaDialog extends JDialog {
     // MODIFIES: main
     // EFFECTS: adds type, title, genre, status, and type-specific fields to main
     private void addCoreFields(JPanel main) {
-       createMediaTypeSelector(main);
+        createMediaTypeSelector(main);
         createTitleField(main);
         createGenreField(main);
         createStatusBox(main);
@@ -70,7 +70,7 @@ public class AddMediaDialog extends JDialog {
     // MODIFIES: main
     // EFFECTS: adds Cancel and Add buttons to main
     private void createBtnRow(JPanel main) {
-       JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
         buttonRow.setOpaque(false);
         JButton cancelBtn = new JButton("Cancel");
         JButton addBtn = new JButton("Add");
@@ -85,7 +85,7 @@ public class AddMediaDialog extends JDialog {
     // MODIFIES: ratingReviewPanel
     // EFFECTS: adds a labelled text area for review input to panel
     private void createReviewPanel(JPanel ratingReviewPanel) {
-         JLabel reviewLabel = new JLabel("Review");
+        JLabel reviewLabel = new JLabel("Review");
         reviewLabel.setFont(MediaLibraryGUI.HELDANE_SUB);
         reviewLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         ratingReviewPanel.add(reviewLabel);
@@ -116,7 +116,7 @@ public class AddMediaDialog extends JDialog {
     // MODIFIES: main
     // EFFECTS: adds an empty type-specific panel placeholder to main
     private void createTypeSpecificPanel(JPanel main) {
-       typeSpecificPanel = new JPanel(new BorderLayout());
+        typeSpecificPanel = new JPanel(new BorderLayout());
         typeSpecificPanel.setOpaque(false);
         typeSpecificPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         typeSpecificPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -147,7 +147,7 @@ public class AddMediaDialog extends JDialog {
     // MODIFIES: main
     // EFFECTS: adds a text field for genre input to main
     private void createGenreField(JPanel main) {
-       genreField = new JTextField();
+        genreField = new JTextField();
         genreField.setFont(MediaLibraryGUI.REGULAR);
         main.add(makeLabeledRow("Genre", genreField));
         main.add(Box.createVerticalStrut(8));
@@ -165,7 +165,7 @@ public class AddMediaDialog extends JDialog {
     // MODIFIES: main
     // EFFECTS: adds a combo box for media type selection to main
     private void createMediaTypeSelector(JPanel main) {
-         typeCombo = new JComboBox<>(new String[] { "Book", "Movie", "TV Show" });
+        typeCombo = new JComboBox<>(new String[] { "Book", "Movie", "TV Show" });
         typeCombo.setFont(MediaLibraryGUI.REGULAR);
         typeCombo.addActionListener(e -> refreshTypePanel());
         main.add(makeLabeledRow("Type", typeCombo));
@@ -195,7 +195,8 @@ public class AddMediaDialog extends JDialog {
     }
 
     // MODIFIES: this
-    // EFFECTS: validates inputs and constructs a Media object if valid; shows warning if required fields are empty
+    // EFFECTS: validates inputs and constructs a Media object if valid; shows
+    // warning if required fields are empty
     private void handleInput() {
         String title = titleField.getText().trim();
         String genre = genreField.getText().trim();
@@ -252,7 +253,7 @@ public class AddMediaDialog extends JDialog {
 
     // EFFECTS: shows a warning dialog indicating fieldName cannot be empty
     private void showMissingFieldMsg(String fieldName) {
-       JOptionPane.showMessageDialog(this,
+        JOptionPane.showMessageDialog(this,
                 fieldName + " cannot be empty.", "Missing Fields",
                 JOptionPane.WARNING_MESSAGE);
     }
@@ -276,4 +277,3 @@ public class AddMediaDialog extends JDialog {
         return result;
     }
 }
-
