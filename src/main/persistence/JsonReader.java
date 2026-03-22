@@ -44,7 +44,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses media library from JSON object and returns it
     private MediaLibrary parseMediaLibrary(JSONObject json) {
         MediaLibrary ml = new MediaLibrary();
         addMediaItems(ml, json);
@@ -52,7 +52,7 @@ public class JsonReader {
     }
 
     // MODIFIES: ml
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // EFFECTS: parses mediaItems from JSON object and adds them to ml
     private void addMediaItems(MediaLibrary ml, JSONObject json) {
         JSONArray mediaItems = json.getJSONArray("media");
         for (Object mediaJson : mediaItems) {
@@ -62,24 +62,22 @@ public class JsonReader {
     }
 
     // MODIFIES: ml
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // EFFECTS: parses media item from JSON object and adds it to ml
     private void addMedia(MediaLibrary ml, JSONObject json) {
         String title = json.getString("title");
         String genre = json.getString("genre");
         Status status = Status.valueOf(json.getString("status"));
 
-        Media media = null;
-        if (json.has("author")) {
-            String author = json.getString("author");
-            media = new Book(title, status, author, genre);
-        } else if (json.has("director")) {
-            String director = json.getString("director");
-            media = new Movie(title, status, director, genre);
-        } else {
-            int numSeasons = json.getInt("number of seasons");
-            media = new TVShow(title, status, numSeasons, genre);
-        }
+        Media media = setTypeSpecificFields(json, title, genre, status);
+        setOptionalFields(json, media);
 
+        ml.addEntry(media);
+    }
+
+    // MODIFIES: media
+    // EFFECTS: parses rating, review, and cover image from json and
+    // adds it to media, if exist
+    private void setOptionalFields(JSONObject json, Media media) {
         if (json.has("rating")) {
             int rating = json.getInt("rating");
             media.setRating(rating);
@@ -94,6 +92,22 @@ public class JsonReader {
                 media.setCoverImagePath(path);
             }
         }
-        ml.addEntry(media);
+    }
+
+    // EFFECTS: parses media item from json with title, genre, status, and
+    // type-specific fields
+    private Media setTypeSpecificFields(JSONObject json, String title, String genre, Status status) {
+        Media media;
+        if (json.has("author")) {
+            String author = json.getString("author");
+            media = new Book(title, status, author, genre);
+        } else if (json.has("director")) {
+            String director = json.getString("director");
+            media = new Movie(title, status, director, genre);
+        } else {
+            int numSeasons = json.getInt("number of seasons");
+            media = new TVShow(title, status, numSeasons, genre);
+        }
+        return media;
     }
 }
