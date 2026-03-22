@@ -18,10 +18,11 @@ import persistence.JsonWriter;
 @ExcludeFromJacocoGeneratedReport
 public class MediaLibraryGUI extends JFrame {
 
-    public static final Font HELDANE = loadFont("fonts/Heldane/TestHeldaneDisplay-Medium-BF6621e298bc880.otf", 22);
-    public static final Font HELDANE_SUB = loadFont("fonts/Heldane/TestHeldaneDisplay-Medium-BF6621e298bc880.otf", 15);
-    public static final Font REGULAR_BOLD = loadFont("fonts/Inter-Bold.otf", 13);
-    public static final Font REGULAR = loadFont("fonts/Inter-Medium.otf", 12);
+    public static final Font HELDANE = loadFont("resources/fonts/TestHeldaneDisplay-Medium-BF6621e298bc880.otf", 22);
+    public static final Font HELDANE_SUB = loadFont(
+            "resources/fonts/Heldane/TestHeldaneDisplay-Medium-BF6621e298bc880.otf", 15);
+    public static final Font REGULAR_BOLD = loadFont("resources/fonts/Inter-Bold.otf", 13);
+    public static final Font REGULAR = loadFont("resources/fonts/Inter-Medium.otf", 12);
     private static final String SAVE_DIR = "./data/";
 
     private MediaLibrary mediaLibrary;
@@ -150,7 +151,7 @@ public class MediaLibraryGUI extends JFrame {
         welcomePanel.setOpaque(false);
 
         JLabel iconLabel = new JLabel();
-        ImageIcon icon = createImageIcon("../resources/image-removebg-preview.png");
+        ImageIcon icon = createImageIcon("resources/icons/image-removebg-preview.png");
         Image scaledImage = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         iconLabel.setIcon(new ImageIcon(scaledImage));
         iconLabel.setAlignmentX(LEFT_ALIGNMENT);
@@ -236,9 +237,9 @@ public class MediaLibraryGUI extends JFrame {
 
     // EFFECTS: returns an ImageIcon, or null if the path was invalid
     public static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = MediaLibraryGUI.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
+        File file = new File(path);
+        if (file.exists()) {
+            return new ImageIcon(file.getAbsolutePath());
         } else {
             System.err.println("Couldn't find file: " + path);
             return null;
@@ -249,7 +250,7 @@ public class MediaLibraryGUI extends JFrame {
     // "Nothing to show here..."
     public static JLabel nothingMessage() {
         JLabel empty = new JLabel("Nothing to show here...", JLabel.CENTER);
-        Image scaled = MediaLibraryGUI.createImageIcon("../resources/sleepy.png").getImage()
+        Image scaled = MediaLibraryGUI.createImageIcon("resources/icons/sleepy.png").getImage()
                 .getScaledInstance(85, 80, Image.SCALE_SMOOTH);
         empty.setIcon(new ImageIcon(scaled));
         empty.setHorizontalTextPosition(JLabel.CENTER);
@@ -288,26 +289,31 @@ public class MediaLibraryGUI extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        IntelliJTheme.setup(MediaLibraryGUI.class.getResourceAsStream("../resources/cute_pink_light.theme.json"));
+    // MODIFIES: UIManager
+    // EFFECTS: sets FlatLaf UIManager properties for tabs, buttons, and fonts
+    private static void setupUIManager() {
+        Color bg = UIManager.getColor("Panel.background");
+        UIManager.put("TabbedPane.selectedBackground", bg);
+        UIManager.put("TabbedPane.cardTabSelectionHeight", 0);
+        UIManager.put("TabbedPane.underlineColor", bg);
+        UIManager.put("TabbedPane.tabSelectionHeight", 0);
+        UIManager.put("TabbedPane.hoverColor", bg);
+        UIManager.put("TabbedPane.contentAreaColor", bg);
+        UIManager.put("Button.foreground", new Color(0x161015));
+        UIManager.put("Button.default.foreground", new Color(0x161015));
+        UIManager.put("Button.font", MediaLibraryGUI.REGULAR);
+        UIManager.put("Button.default.font", MediaLibraryGUI.REGULAR);
+        UIManager.put("OptionPane.buttonFont", MediaLibraryGUI.REGULAR);
+        UIManager.put("OptionPane.messageFont", MediaLibraryGUI.REGULAR);
+        UIManager.put("OptionPane.font", MediaLibraryGUI.REGULAR);
+        UIManager.put("TextField.font", MediaLibraryGUI.REGULAR);
+    }
 
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-                Color bg = UIManager.getColor("Panel.background");
-                UIManager.put("TabbedPane.selectedBackground", bg);
-                UIManager.put("TabbedPane.cardTabSelectionHeight", 0);
-                UIManager.put("TabbedPane.underlineColor", bg);
-                UIManager.put("TabbedPane.tabSelectionHeight", 0);
-                UIManager.put("TabbedPane.hoverColor", bg);
-                UIManager.put("TabbedPane.contentAreaColor", bg);
-                UIManager.put("Button.foreground", new Color(0x161015));
-                UIManager.put("Button.default.foreground", new Color(0x161015));
-                UIManager.put("Button.font", MediaLibraryGUI.REGULAR);
-                UIManager.put("Button.default.font", MediaLibraryGUI.REGULAR);
-                UIManager.put("OptionPane.buttonFont", MediaLibraryGUI.REGULAR);
-                UIManager.put("OptionPane.messageFont", MediaLibraryGUI.REGULAR);
-                UIManager.put("OptionPane.font", MediaLibraryGUI.REGULAR);
-                UIManager.put("TextField.font", MediaLibraryGUI.REGULAR);
+                IntelliJTheme.setup(new java.io.FileInputStream("resources/theme/cute_pink_light.theme.json"));
+                setupUIManager();
             } catch (Exception e) {
                 e.printStackTrace();
             }

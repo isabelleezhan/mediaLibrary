@@ -194,11 +194,11 @@ public class MediaCard extends RoundedPanel {
     private void loadDefaultCover() {
         String iconPath;
         if ("Book".equals(media.getMediaType())) {
-            iconPath = "../resources/icons/book.png";
+            iconPath = "resources/icons/book.png";
         } else if ("Movie".equals(media.getMediaType())) {
-            iconPath = "../resources/icons/movie.png";
+            iconPath = "resources/icons/movie.png";
         } else {
-            iconPath = "../resources/icons/tvshow.png";
+            iconPath = "resources/icons/tvshow.png";
         }
         Image scaled = MediaLibraryGUI.createImageIcon(iconPath).getImage()
                 .getScaledInstance(CARD_WIDTH - 30, IMG_HEIGHT - 40, Image.SCALE_SMOOTH);
