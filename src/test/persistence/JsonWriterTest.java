@@ -39,6 +39,7 @@ public class JsonWriterTest extends JsonTest {
             writer.open();
             fail("Should've thrown an IOException");
         } catch (IOException e) {
+            // expected
         }
     }
 

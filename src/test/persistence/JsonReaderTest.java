@@ -28,6 +28,7 @@ public class JsonReaderTest extends JsonTest {
             reader.read();
             fail("Should've thrown IOException");
         } catch (IOException e) {
+            // expected
         }
     }
 

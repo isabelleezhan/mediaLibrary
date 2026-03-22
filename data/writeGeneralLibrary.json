@@ -2,6 +2,7 @@
     {
         "review": "It was good!",
         "director": "Chloe Zhao",
+        "coverImagePath": "/data/dune",
         "genre": "Drama",
         "rating": 4,
         "title": "Hamnet",
@@ -9,6 +10,7 @@
     },
     {
         "review": "If only they stopped at season 4...",
+        "coverImagePath": "",
         "genre": "Fantasy",
         "rating": 5,
         "title": "Game of Thrones",
@@ -17,6 +19,7 @@
     },
     {
         "author": "R.F. Kuang",
+        "coverImagePath": "",
         "genre": "Historical Fantasy",
         "rating": 0,
         "title": "Babel",
