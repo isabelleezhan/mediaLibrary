@@ -20,7 +20,7 @@ public class MediaLibraryGUI extends JFrame {
 
     public static final Font HELDANE = loadFont("resources/fonts/TestHeldaneDisplay-Medium-BF6621e298bc880.otf", 22);
     public static final Font HELDANE_SUB = loadFont(
-            "resources/fonts/Heldane/TestHeldaneDisplay-Medium-BF6621e298bc880.otf", 15);
+            "resources/fonts/TestHeldaneDisplay-Medium-BF6621e298bc880.otf", 15);
     public static final Font REGULAR_BOLD = loadFont("resources/fonts/Inter-Bold.otf", 13);
     public static final Font REGULAR = loadFont("resources/fonts/Inter-Medium.otf", 12);
     private static final String SAVE_DIR = "./data/";
