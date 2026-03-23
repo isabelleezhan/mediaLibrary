@@ -126,6 +126,7 @@ public class MediaLibraryGUI extends JFrame {
     // exits without saving if NO, keeps app open if CANCEL
     private void setPromptSaveLibrary() {
         addWindowListener(new java.awt.event.WindowAdapter() {
+            // EFFECTS: prompts user to save before quitting (yes/no/cancel)
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
                 int choice = JOptionPane.showConfirmDialog(

@@ -130,6 +130,7 @@ public class AddMediaDialog extends JDialog {
         statusCombo = new JComboBox<>(Status.values());
         statusCombo.setFont(MediaLibraryGUI.REGULAR);
         statusCombo.setRenderer(new DefaultListCellRenderer() {
+            // EFFECTS: returns a rendered component displaying the Status label string
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value,
                     int index, boolean isSelected, boolean cellHasFocus) {

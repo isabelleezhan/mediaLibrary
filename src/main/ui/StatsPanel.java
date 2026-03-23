@@ -121,6 +121,7 @@ public class StatsPanel extends JPanel {
     // EFFECTS: returns a grouped stat panel with title and sub-stat cards
     private JPanel makeStatGroup(String groupTitle, String[] labels, String[] values) {
         JPanel group = new JPanel() {
+            // EFFECTS: paints a rounded rectangle background onto g
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();

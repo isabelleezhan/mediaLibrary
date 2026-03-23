@@ -247,6 +247,7 @@ public class EditMediaDialog extends JDialog {
 
     // EFFECTS: renders Status enum values using their display label
     private static class StatusRenderer extends DefaultListCellRenderer {
+        // EFFECTS: returns a rendered component displaying the Status label string
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value,
                 int index, boolean isSelected, boolean cellHasFocus) {

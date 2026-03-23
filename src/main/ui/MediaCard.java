@@ -95,6 +95,9 @@ public class MediaCard extends RoundedPanel {
     // EFFECTS: returns a mouse listener that opens EditMediaDialog on left click
     private MouseAdapter buildMouseListener() {
         return new MouseAdapter() {
+            // MODIFIES: this
+            // EFFECTS: opens the edit dialog for this card if the left mouse button was
+            // clicked
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
@@ -102,11 +105,15 @@ public class MediaCard extends RoundedPanel {
                 }
             }
 
+            // MODIFIES: this
+            // EFFECTS: sets background to hover color when mouse enters the card
             @Override
             public void mouseEntered(MouseEvent e) {
                 setBackground(UIManager.getColor("TabbedPane.hoverColor"));
             }
 
+            // MODIFIES: this
+            // EFFECTS: restores background to default panel color when mouse exits the card
             @Override
             public void mouseExited(MouseEvent e) {
                 setBackground(UIManager.getColor("Panel.background"));

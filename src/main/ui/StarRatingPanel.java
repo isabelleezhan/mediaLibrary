@@ -41,17 +41,23 @@ public class StarRatingPanel extends JPanel {
     // on click, highlights on hover, and refreshes on exit
     private MouseAdapter buildStarListener(int index) {
         return new MouseAdapter() {
+            // MODIFIES: this
+            // EFFECTS: sets rating to index + 1 and refreshes star display
             @Override
             public void mouseClicked(MouseEvent e) {
                 rating = index + 1;
                 refresh();
             }
 
+            // MODIFIES: this
+            // EFFECTS: highlights all stars up to and including index
             @Override
             public void mouseEntered(MouseEvent e) {
                 highlightUpTo(index);
             }
 
+            // MODIFIES: this
+            // EFFECTS: refreshes star display to reflect current rating
             @Override
             public void mouseExited(MouseEvent e) {
                 refresh();
