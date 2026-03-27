@@ -71,7 +71,7 @@ public class JsonReader {
         Media media = setTypeSpecificFields(json, title, genre, status);
         setOptionalFields(json, media);
 
-        ml.addEntry(media);
+        ml.addEntryQuiet(media);
     }
 
     // MODIFIES: media
@@ -80,11 +80,11 @@ public class JsonReader {
     private void setOptionalFields(JSONObject json, Media media) {
         if (json.has("rating")) {
             int rating = json.getInt("rating");
-            media.setRating(rating);
+            media.setRatingQuiet(rating);
         }
         if (json.has("review")) {
             String review = json.getString("review");
-            media.setReview(review);
+            media.setReviewQuiet(review);
         }
         if (json.has("coverImagePath")) {
             String path = json.getString("coverImagePath");

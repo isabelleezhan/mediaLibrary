@@ -20,6 +20,8 @@ public class TVShow extends Media {
 
     public void setNumSeasons(int numSeasons) {
         this.numSeasons = numSeasons;
+        EventLog.getInstance().logEvent(new Event("Number of seasons of \""
+                + getTitle() + "\" updated to: " + numSeasons));
     }
 
     // EFFECTS: returns number of seasons

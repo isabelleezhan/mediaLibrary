@@ -11,6 +11,7 @@ import com.formdev.flatlaf.IntelliJTheme;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -113,6 +114,7 @@ public class MediaLibraryGUI extends JFrame {
         if (choice == JOptionPane.YES_OPTION) {
             try {
                 mediaLibrary = jsonReader.read();
+                // EventLog.getInstance().clear(); 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null,
                         "Could not load library: " + e.getMessage(),
@@ -126,7 +128,8 @@ public class MediaLibraryGUI extends JFrame {
     // exits without saving if NO, keeps app open if CANCEL
     private void setPromptSaveLibrary() {
         addWindowListener(new java.awt.event.WindowAdapter() {
-            // EFFECTS: prompts user to save before quitting (yes/no/cancel)
+            // EFFECTS: prompts user to save before quitting (yes/no/cancel); 
+            // prints eventLog and exits if YES
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
                 int choice = JOptionPane.showConfirmDialog(
@@ -137,11 +140,14 @@ public class MediaLibraryGUI extends JFrame {
                         JOptionPane.QUESTION_MESSAGE);
                 if (choice == JOptionPane.YES_OPTION) {
                     saveLibrary();
+                    printEventLog();
                     System.exit(0);
                 } else if (choice == JOptionPane.NO_OPTION) {
+                    printEventLog();
                     System.exit(0);
                 }
             }
+
         });
     }
 
@@ -234,6 +240,13 @@ public class MediaLibraryGUI extends JFrame {
     public void refreshAll() {
         ((ViewMediaPanel) viewPanel).refresh();
         ((StatsPanel) statsPanel).refresh();
+    }
+
+    // EFFECTS: prints all logged events to console
+    private void printEventLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e.toString());
+        }
     }
 
     // EFFECTS: returns an ImageIcon, or null if the path was invalid

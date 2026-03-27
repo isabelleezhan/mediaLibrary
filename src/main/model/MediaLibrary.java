@@ -23,6 +23,8 @@ public class MediaLibrary implements Writable {
     // MODIFIES: this
     // EFFECTS: adds the given media item to the library
     public void addEntry(Media entry) {
+        EventLog.getInstance().logEvent(new Event(entry.getMediaType()
+                + " added to library: " + entry.getTitle()));
         allMedia.add(entry);
     }
 
@@ -30,6 +32,8 @@ public class MediaLibrary implements Writable {
     // MODIFIES: this
     // EFFECTS: removes the given media item from the library
     public void deleteEntry(Media entry) {
+        EventLog.getInstance().logEvent(new Event(entry.getMediaType()
+                + " removed from library: " + entry.getTitle()));
         allMedia.remove(entry);
     }
 
@@ -43,6 +47,7 @@ public class MediaLibrary implements Writable {
                 filteredList.add(m);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Filtered by type: " + type));
         return filteredList;
     }
 
@@ -56,6 +61,7 @@ public class MediaLibrary implements Writable {
                 filteredList.add(m);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Filtered by status: " + status));
         return filteredList;
     }
 
@@ -69,6 +75,8 @@ public class MediaLibrary implements Writable {
                 filteredList.add(m);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Filtered by type and status: "
+                + type + " and " + status));
         return filteredList;
     }
 
@@ -88,7 +96,7 @@ public class MediaLibrary implements Writable {
 
     // EFFECTS: returns number of finished items in this library
     public int getNumFinished() {
-        return filterByStatus(Status.FINISHED).size();
+        return filterByStatusQuiet(Status.FINISHED).size();
     }
 
     // EFFECTS: returns the total number of media items in this library
@@ -99,6 +107,47 @@ public class MediaLibrary implements Writable {
     // getters - don't need specification
     public List<Media> getAllMedia() {
         return allMedia;
+    }
+
+    // REQUIRES: type is one of "Book", "Movie", "TV Show"
+    // EFFECTS: returns filtered list by type without logging
+    public List<Media> filterByTypeQuiet(String type) {
+        List<Media> filteredList = new ArrayList<Media>();
+        for (Media m : allMedia) {
+            if (m.getMediaType().equals(type)) {
+                filteredList.add(m);
+            }
+        }
+        return filteredList;
+    }
+
+    // EFFECTS: returns filtered list by status without logging
+    public List<Media> filterByStatusQuiet(Status status) {
+        List<Media> filteredList = new ArrayList<Media>();
+        for (Media m : allMedia) {
+            if (m.getStatus() == status) {
+                filteredList.add(m);
+            }
+        }
+        return filteredList;
+    }
+
+    // EFFECTS: returns filtered list by type and status without logging
+    public List<Media> filterByTypeAndStatusQuiet(String type, Status status) {
+        List<Media> filteredList = new ArrayList<Media>();
+        for (Media m : allMedia) {
+            if (m.getMediaType().equals(type) && m.getStatus() == status) {
+                filteredList.add(m);
+            }
+        }
+        return filteredList;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds the given media item to the library without logging
+    // (used for loading from file only)
+    public void addEntryQuiet(Media entry) {
+        allMedia.add(entry);
     }
 
     // EFFECTS: returns media library as JSON object

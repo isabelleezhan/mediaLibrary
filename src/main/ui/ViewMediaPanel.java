@@ -69,26 +69,24 @@ public class ViewMediaPanel extends JPanel {
 
     // MODIFIES: this
     // EFFECTS: refreshes the card grid based on current filter selections;
-    //          shows empty state message if no items match the filter
+    // shows empty state message if no items match the filter
     public void refresh() {
         gridPanel.removeAll();
 
         String type = (String) typeBox.getSelectedItem();
         Object statusChoice = statusBox.getSelectedItem();
-
+        boolean allTypes = type == null || "All".equals(type);
+        boolean allStatuses = !(statusChoice instanceof Status);
         List<Media> toShow;
-        if (type == null || "All".equals(type)) {
-            toShow = gui.getMediaLibrary().getAllMedia();
-        } else {
-            toShow = gui.getMediaLibrary().filterByType(type);
-        }
 
-        if (statusChoice instanceof Status) {
-            if (type == null || "All".equals(type)) {
-                toShow = gui.getMediaLibrary().filterByStatus((Status) statusChoice);
-            } else {
-                toShow = gui.getMediaLibrary().filterByTypeAndStatus(type, (Status) statusChoice);
-            }
+        if (allTypes && allStatuses) {
+            toShow = gui.getMediaLibrary().getAllMedia();
+        } else if (allTypes) {
+            toShow = gui.getMediaLibrary().filterByStatus((Status) statusChoice);
+        } else if (allStatuses) {
+            toShow = gui.getMediaLibrary().filterByType(type);
+        } else {
+            toShow = gui.getMediaLibrary().filterByTypeAndStatus(type, (Status) statusChoice);
         }
 
         for (Media m : toShow) {
@@ -99,7 +97,7 @@ public class ViewMediaPanel extends JPanel {
         gridPanel.repaint();
     }
 
-    // EFFECTS: returns array of status filter options 
+    // EFFECTS: returns array of status filter options
     private Object[] buildStatusOptions() {
         Object[] options = new Object[Status.values().length + 1];
         options[0] = "All";

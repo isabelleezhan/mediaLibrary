@@ -178,13 +178,19 @@ public class EditMediaDialog extends JDialog {
     // EFFECTS: updates media based on selections
     private void handleSave() {
         Status status = (Status) statusCombo.getSelectedItem();
-        media.setStatus(status);
+        if (status != media.getStatus()) {
+            media.setStatus(status);
+        }
         updateSeasonsIfTVShow();
         if (status == Status.FINISHED) {
             applyRatingAndReview();
         } else {
-            media.setRating(0);
-            media.setReview(null);
+            if (media.getRating() != 0) {
+                media.setRating(0);
+            }
+            if (media.getReview() != null) {
+                media.setReview(null);
+            }
         }
         confirmed = true;
         dispose();
@@ -195,7 +201,10 @@ public class EditMediaDialog extends JDialog {
     // and numSeasonsSpinner is not null
     private void updateSeasonsIfTVShow() {
         if (media instanceof TVShow && numSeasonsSpinner != null) {
-            ((TVShow) media).setNumSeasons((int) numSeasonsSpinner.getValue());
+            int newSeasons = (int) numSeasonsSpinner.getValue();
+            if (newSeasons != ((TVShow) media).getNumSeasons()) {
+                ((TVShow) media).setNumSeasons(newSeasons);
+            }
         }
     }
 
@@ -203,11 +212,11 @@ public class EditMediaDialog extends JDialog {
     // EFFECTS: sets media's rating and review
     private void applyRatingAndReview() {
         int rating = starPanel.getRating();
-        if (rating > 0) {
+        if (rating > 0 && rating != media.getRating()) {
             media.setRating(rating);
         }
         String review = reviewArea.getText().trim();
-        if (!review.isEmpty()) {
+        if (!review.isEmpty() && !review.equals(media.getReview())) {
             media.setReview(review);
         }
     }

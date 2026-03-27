@@ -31,17 +31,29 @@ public abstract class Media implements Writable {
     // otherwise is unchanged
     public void setRating(int rating) {
         if (rating >= 1 && rating <= 5) {
+            boolean firstTime = false;
+            if (this.rating == 0) {
+                firstTime = true;
+            }
             this.rating = rating;
+            if (!firstTime) {
+                EventLog.getInstance().logEvent(new Event("Rating of \""
+                        + title + "\" updated to: " + rating + " stars"));
+            }
         }
     }
 
     // setters - don't need specification
     public void setReview(String review) {
         this.review = review;
+        EventLog.getInstance().logEvent(new Event("Review of \""
+                + title + "\" updated to: " + review));
     }
 
     public void setStatus(Status status) {
         this.status = status;
+        EventLog.getInstance().logEvent(new Event("Status of \""
+                + title + "\" updated to: " + status.getLabel()));
     }
 
     public void setCoverImagePath(String path) {
@@ -73,6 +85,20 @@ public abstract class Media implements Writable {
         return coverImagePath;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets rating without logging (used for loading from file only)
+    public void setRatingQuiet(int rating) {
+        if (rating >= 1 && rating <= 5) {
+            this.rating = rating;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets review without logging (used for loading from file only)
+    public void setReviewQuiet(String review) {
+        this.review = review;
+    }
+
     // EFFECTS: returns the media type name (e.g. "Book", "Movie", "TV Show")
     public abstract String getMediaType();
 
@@ -100,7 +126,7 @@ public abstract class Media implements Writable {
     }
 
     // Based on: JsonSerializationDemo
-    // EFFECTS: returns media item written as JSON object 
+    // EFFECTS: returns media item written as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -112,5 +138,5 @@ public abstract class Media implements Writable {
         json.put("coverImagePath", coverImagePath != null ? coverImagePath : "");
         return json;
     }
-    
+
 }

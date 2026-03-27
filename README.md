@@ -30,3 +30,24 @@ Bookworms and movie/TV enthusiasts like myself who juggle extensive "To be Read"
 - You can load the state of my application upon entering your username at startup and selecting "yes" to loading your saved library
 - You can edit a media item by pressing on the entry in the library panel
 - You can choose a cover image for a media item by right-clicking on the media item entry in the library panel
+
+## Phase 4: Task 2
+Example output:  
+    Fri Mar 27 03:35:43 PDT 2026  
+    Filtered by type: Book  
+    Fri Mar 27 03:35:48 PDT 2026  
+    Filtered by type and status: Book and WANT_TO  
+    Fri Mar 27 03:35:49 PDT 2026  
+    Filtered by type and status: Book and IN_PROGRESS  
+    Fri Mar 27 03:35:51 PDT 2026  
+    Filtered by type: Book  
+    Fri Mar 27 03:36:10 PDT 2026   
+    Number of seasons of "SLOMW" updated to: 4  
+    Fri Mar 27 03:36:29 PDT 2026  
+    Rating of "Discrete Mathematics" updated to: 1 stars  
+    Fri Mar 27 03:36:29 PDT 2026  
+    Review of "Discrete Mathematics" updated to: Even worse than I remember  
+    Fri Mar 27 03:40:28 PDT 2026  
+    Movie added to library: Moana     
+
+## Phase 4: Task 3

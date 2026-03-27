@@ -66,9 +66,9 @@ public class StatsPanel extends JPanel {
         int total = lib.getTotalNumberItems();
         int finished = lib.getNumFinished();
         double pct = total > 0 ? finished * 100.0 / total : 0;
-        double avgBook = lib.getAverageRating(lib.filterByTypeAndStatus("Book", Status.FINISHED));
-        double avgMovie = lib.getAverageRating(lib.filterByTypeAndStatus("Movie", Status.FINISHED));
-        double avgTV = lib.getAverageRating(lib.filterByTypeAndStatus("TV Show", Status.FINISHED));
+        double avgBook = lib.getAverageRating(lib.filterByTypeAndStatusQuiet("Book", Status.FINISHED));
+        double avgMovie = lib.getAverageRating(lib.filterByTypeAndStatusQuiet("Movie", Status.FINISHED));
+        double avgTV = lib.getAverageRating(lib.filterByTypeAndStatusQuiet("TV Show", Status.FINISHED));
 
         JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 16, 0));
         row.setOpaque(false);
@@ -100,9 +100,9 @@ public class StatsPanel extends JPanel {
     private BarChartPanel buildTypeBarChart(MediaLibrary lib) {
         return new BarChartPanel("Media by Type",
                 new String[] { "Books", "Movies", "TV Shows" },
-                new int[] { lib.filterByType("Book").size(),
-                        lib.filterByType("Movie").size(),
-                        lib.filterByType("TV Show").size() },
+                new int[] { lib.filterByTypeQuiet("Book").size(),
+                        lib.filterByTypeQuiet("Movie").size(),
+                        lib.filterByTypeQuiet("TV Show").size() },
                 new Color[] { new Color(0xF14874), new Color(0xF4B4CC), new Color(0xFB9B8F) });
     }
 
@@ -110,10 +110,10 @@ public class StatsPanel extends JPanel {
     private DonutChartPanel buildStatusDonutChart(MediaLibrary lib) {
         return new DonutChartPanel("Status Breakdown",
                 new String[] { "Want to", "In Progress", "Finished", "DNF" },
-                new int[] { lib.filterByStatus(Status.WANT_TO).size(),
-                        lib.filterByStatus(Status.IN_PROGRESS).size(),
-                        lib.filterByStatus(Status.FINISHED).size(),
-                        lib.filterByStatus(Status.DNF).size() },
+                new int[] { lib.filterByStatusQuiet(Status.WANT_TO).size(),
+                        lib.filterByStatusQuiet(Status.IN_PROGRESS).size(),
+                        lib.filterByStatusQuiet(Status.FINISHED).size(),
+                        lib.filterByStatusQuiet(Status.DNF).size() },
                 new Color[] { new Color(0xFCDEE9), new Color(0xF4B4CC),
                         new Color(0xF14874), new Color(0xFB9B8F) });
     }
