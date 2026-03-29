@@ -114,7 +114,7 @@ public class MediaLibraryGUI extends JFrame {
         if (choice == JOptionPane.YES_OPTION) {
             try {
                 mediaLibrary = jsonReader.read();
-                // EventLog.getInstance().clear(); 
+                // EventLog.getInstance().clear();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null,
                         "Could not load library: " + e.getMessage(),
@@ -128,7 +128,7 @@ public class MediaLibraryGUI extends JFrame {
     // exits without saving if NO, keeps app open if CANCEL
     private void setPromptSaveLibrary() {
         addWindowListener(new java.awt.event.WindowAdapter() {
-            // EFFECTS: prompts user to save before quitting (yes/no/cancel); 
+            // EFFECTS: prompts user to save before quitting (yes/no/cancel);
             // prints eventLog and exits if YES
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -305,6 +305,8 @@ public class MediaLibraryGUI extends JFrame {
 
     // MODIFIES: UIManager
     // EFFECTS: sets FlatLaf UIManager properties for tabs, buttons, and fonts
+    // Resources: https://www.formdev.com/flatlaf/how-to-customize/ &
+    // https://www.formdev.com/flatlaf/components/
     private static void setupUIManager() {
         Color bg = UIManager.getColor("Panel.background");
         UIManager.put("TabbedPane.selectedBackground", bg);
