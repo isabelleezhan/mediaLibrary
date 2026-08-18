@@ -56,3 +56,5 @@ To refactor, I might consider extracting a **shared abstract superclass** for `A
 
 A second refactoring change I would do involves the declared types of fields in `MediaLibraryGUI` and `StatsPanel`. Currently `viewPanel` and `statsPanel` are declared as JPanel rather than their actual types `ViewMediaPanel` and `StatsPanel`, and `StatsPanel` creates `BarChartPanel` and `DonutChartPanel` locally rather than holding them as fields. Therefore, none of these associations appear in the UML diagram despite the classes functionally depending on each other. If I had more time, I would add and declare all fields using their actual types to make these relationships explicit. Moreover, both `MediaLibraryApp` and `MediaLibraryGUI` associate with `JsonReader` and `JsonWriter` and implement the same save/load responsibility. I might look into whether I can extract this shared persistent logic into a dedicated `PersistenceManager` class that both classes delegate to, which again reduces code duplication and enables a single point of change for storage format changes in the future. 
 
+## UML DIAGRAM
+![UML Diagram](mediaLibrary_UML.png)
